@@ -5,7 +5,7 @@ import Link from "next/link";
 import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "~/navigation";
 import LoginForm from "./LoginForm";
-// import LocaleSwitcher from "~/components/LocaleSwitcher";
+import LocaleSwitcher from "~/components/LocaleSwitcher";
 
 export const metadata: Metadata = {
   title: "Login Front App",
@@ -24,7 +24,7 @@ export default async function LoginPage() {
   return (
     <>
       <div className="relative h-screen flex-col items-center justify-center lg:container lg:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
-        {/* <LocaleSwitcher /> */}
+        <LocaleSwitcher />
 
         <div className="relative flex-col bg-muted p-6 py-10 text-white dark:border-r lg:flex lg:h-full lg:p-10">
           <div className="absolute inset-0 bg-zinc-900" />

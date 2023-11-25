@@ -9,7 +9,7 @@ import EmailProvider from "next-auth/providers/email";
 
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
-import { mysqlTable, users } from "~/server/db/schema";
+import { pgTable, users } from "~/server/db/schema";
 import { sendVerificationRequest } from "./send-verification-request";
 import { DefaultJWT, JWT } from "next-auth/jwt";
 import { ErrorMessage, UserRole } from "~/constans";
@@ -120,7 +120,11 @@ export const authOptions: NextAuthOptions = {
     secret: env.NEXTAUTH_SECRET,
   },
   secret: env.NEXTAUTH_SECRET,
-  adapter: DrizzleAdapter(db, mysqlTable),
+  adapter: DrizzleAdapter(db, pgTable),
+
+  pages: {
+    signIn: "/es/login",
+  },
   /**
    * ...add more providers here.
    *
