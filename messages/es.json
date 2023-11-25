@@ -1,0 +1,31 @@
+{
+  "Error": {
+    "user_not_found": "Usuario no encontrado para el correo: ",
+    "email_invalid": "Por favor, introduzca una dirección de correo electrónico válida",
+    "email_no_sent": "Email (${message}) no ha sido enviado"
+  },
+  "Login": {
+    "app_name": "Front",
+    "welcome": "Bienvenido a",
+    "headline": "ingresar",
+    "subheadline": "Ingresa tu email a continuación para iniciar sesión",
+    "cta_button": "Iniciar sesión con email",
+    "continue": "Al hacer clic en continuar, aceptas nuestros",
+    "terms_of_service": "Términos de servicio",
+    "privacy_policy": "política de privacidad",
+    "and": "y",
+    "email_sent": "Se ha enviado un correo electrónico con un enlace para iniciar sesión. Si no lo ve, revise su carpeta de correo no deseado."
+  },
+  "Terms": {
+    "headline": "Términos de servicio",
+    "subheadline": "Last updated: 1/1/2019",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  },
+  "Privacy": {
+    "headline": "Política de privacidad",
+    "subheadline": "Last updated: 1/1/2019",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  }
+}

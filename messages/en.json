@@ -1,0 +1,31 @@
+{
+  "Error": {
+    "user_not_found": "No user found for email: ",
+    "email_invalid": "Please enter a valid email address",
+    "email_not_sent": "Email could (${message}) not be sent"
+  },
+  "Login": {
+    "app_name": "Front",
+    "welcome": "Welcome to",
+    "headline": "login",
+    "subheadline": "Enter your email below to login",
+    "cta_button": "Sign In with Email",
+    "continue": "By clicking continue, you agree to our",
+    "terms_of_service": "Terms of Service",
+    "privacy_policy": "Privacy Policy",
+    "and": "and",
+    "email_sent": "An email has been sent with a link to log in. If you don't see it, check your spam folder."
+  },
+  "Terms": {
+    "headline": "Terms of Service",
+    "subheadline": "Last updated: 1/1/2019",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  },
+  "Privacy": {
+    "headline": "Privacy Policy",
+    "subheadline": "Last updated: 1/1/2019",
+    "terms": "Terms",
+    "privacy": "Privacy"
+  }
+}
