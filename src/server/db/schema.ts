@@ -3,9 +3,11 @@ import {
   text,
   primaryKey,
   integer,
+  serial,
   pgTableCreator,
   // bigint,
   // varchar,
+  json,
   pgEnum,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
@@ -20,10 +22,26 @@ import type { AdapterAccount } from "@auth/core/adapters";
 // Change name of copy_hub_t3 to create prefixes for tables:
 export const pgTable = pgTableCreator((name) => `t3stack_${name}`);
 
+export const companies = pgTable("company", {
+  id: serial("id").primaryKey(),
+  name: text("name"),
+  settings: json("settings"),
+});
+
+export const organizations = pgTable("organization", {
+  id: serial("id").primaryKey(),
+  company_id: text("company_id")
+    .notNull()
+    .references(() => companies.id),
+  name: text("name"),
+  settings: json("settings"),
+});
+
 export const roleEnum = pgEnum("role", ["USER", "ADMIN"]);
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),
+  organization_id: text("organization_id").references(() => organizations.id),
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),

@@ -9,6 +9,17 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 - [tRPC](https://trpc.io)
 - [Postgres](https://tailwindcss.com)
 
+# shadcn add components
+
+```bash
+#example
+npx shadcn-ui@latest add button
+```
+
+# icons
+
+[lucide react](https://lucide.dev/guide/packages/lucide-react)
+
 # Docker (db and pgadmin)
 
 ```bash

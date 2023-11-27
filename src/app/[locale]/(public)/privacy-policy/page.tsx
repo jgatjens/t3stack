@@ -1,7 +1,6 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { api } from "~/trpc/server";
-// import LocaleSwitcher from "~/app/components/LocaleSwitcher";
 
 export const metadata: Metadata = {
   title: "Terms of Service",
@@ -11,13 +10,13 @@ export const metadata: Metadata = {
 export default async function LoginPage() {
   const t = await getTranslations();
 
-  const hello = await api.post.hello.query({ text: "from tRPC" });
+  // const hello = await api.post.hello.query({ text: "from tRPC" });
 
   // const user = await api.user.checkUserLogin.query({
   //   email: "jgatjens@gmail.com",
   // });
 
-  console.log(hello);
+  // console.log(hello);
 
   return (
     <>

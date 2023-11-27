@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
-// import LocaleSwitcher from "~/app/components/LocaleSwitcher";
 
 export const metadata: Metadata = {
   title: "Terms of Service",

@@ -29,11 +29,7 @@ export const env = createEnv({
       process.env.VERCEL ? z.string() : z.string().url()
     ),
     // Add ` on ID and SECRET if you want to make sure they're not empty
-    // DISCORD_CLIENT_ID: z.string(),
     RESEND_API_KEY: z.string(),
-    // NEXTAUTH_EMAIL_FROM: z.string(),
-    // NEXTAUTH_EMAIL_PASSWORD: z.string(),
-    // DISCORD_CLIENT_SECRET: z.string(),
   },
 
   /**
@@ -42,7 +38,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    // NEXT_PUBLIC_CLIENTVAR: z.string(),
+    NEXT_PUBLIC_APP_URL: z.string().min(1),
   },
 
   /**
@@ -55,8 +51,7 @@ export const env = createEnv({
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    // NEXTAUTH_EMAIL_FROM: process.env.NEXTAUTH_EMAIL_FROM,
-    // NEXTAUTH_EMAIL_PASSWORD: process.env.NEXTAUTH_EMAIL_PASSWORD,
+    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially

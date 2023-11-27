@@ -4,8 +4,8 @@ import Link from "next/link";
 
 import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "~/navigation";
-import LoginForm from "./LoginForm";
-import LocaleSwitcher from "~/components/LocaleSwitcher";
+import LoginForm from "./login-form";
+import LocaleSwitcher from "~/components/locale-switcher";
 
 export const metadata: Metadata = {
   title: "Login Front App",

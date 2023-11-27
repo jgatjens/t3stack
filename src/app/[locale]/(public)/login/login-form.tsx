@@ -47,21 +47,26 @@ export default function LoginForm({
 
     try {
       schema.parse({ email });
-      const res = await signIn("email", { email, redirect: false });
+      const res = await signIn("email", {
+        email,
+        redirect: false,
+        callbackUrl: "/dashboard",
+      });
 
+      // If the user is not found, we show an error toast message
+      if (res?.error === ErrorMessage.AccessDenied) {
+        toast.error(translateNoUserFound + email);
+        inputRef.current?.focus();
+      }
+
+      // If everything is fine, we show a success toast message
       if (!res?.error) {
         setIsEmailSent(true);
         toast.success(translateEmailSent);
       }
 
-      if (res?.error === ErrorMessage.NoUserFound) {
-        toast.error(translateNoUserFound + email);
-        inputRef.current?.focus();
-      }
-
       setIsLoading(false);
     } catch (error) {
-      // console.log(error);
       toast.error(translateInvalidEmail);
       setIsLoading(false);
       inputRef.current?.focus();

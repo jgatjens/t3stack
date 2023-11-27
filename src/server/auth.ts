@@ -12,7 +12,7 @@ import { db } from "~/server/db";
 import { pgTable, users } from "~/server/db/schema";
 import { sendVerificationRequest } from "./send-verification-request";
 import { DefaultJWT, JWT } from "next-auth/jwt";
-import { ErrorMessage, UserRole } from "~/constans";
+import { UserRole } from "~/constans";
 import { eq } from "drizzle-orm";
 
 /**
@@ -27,6 +27,7 @@ declare module "next-auth" {
     user: {
       id: string;
       role: UserRole;
+      organization_id: string;
     } & DefaultSession["user"];
   }
 
@@ -34,9 +35,11 @@ declare module "next-auth" {
     role: UserRole;
   }
 }
+
 declare module "next-auth/adapters" {
   export interface AdapterUser {
     role?: UserRole;
+    organization_id?: string;
   }
 }
 
@@ -62,6 +65,7 @@ export const authOptions: NextAuthOptions = {
     session({ session, token }: { session: Session; token: JWT }) {
       if (token) {
         session.user.id = token.id;
+        // session.user.organization_id = token.organization_id;
         session.user.email = token.email;
         session.user.role = token.role;
         session.user.image = token.picture; // replace 'image' with 'picture'
@@ -82,15 +86,18 @@ export const authOptions: NextAuthOptions = {
         id: dbUser.id,
         role: dbUser.role as UserRole,
         email: dbUser.email,
+        organization_id: dbUser.organization_id,
         emailVerified: dbUser.emailVerified,
         name: dbUser.name,
         picture: dbUser.image,
         sub: token.sub,
       };
     },
+
+    // If Email provider is used, on the first call, it contains a verificationRequest: true property
+    // to indicate it is being triggered in the verification request flow.
+
     signIn: async ({ user, email }) => {
-      // If Email provider is used, on the first call, it contains a verificationRequest: true property
-      // to indicate it is being triggered in the verification request flow.
       if (email?.verificationRequest) {
         // Query database to get user by email address (identifier)
         try {
@@ -98,8 +105,10 @@ export const authOptions: NextAuthOptions = {
             where: eq(users.email, user.email || ""),
           });
 
+          console.log("signIn => dbUser", dbUser);
+
           if (!dbUser) {
-            throw ErrorMessage.NoUserFound;
+            return false;
           }
 
           console.log("signIn => verificationRequest", dbUser.email);
@@ -109,7 +118,6 @@ export const authOptions: NextAuthOptions = {
       }
       // if we dont find a user with the email, we throw an error
       // we dont want to send a magic link if user doesnt exist
-
       return true;
     },
   },
