@@ -4,6 +4,8 @@ import { getCurrentUser } from "~/lib/session";
 import { DashboardHeader } from "~/components/header";
 import { DashboardShell } from "~/components/shell";
 import { api } from "~/trpc/server";
+import { UserRole } from "~/constans";
+import { ShowUsers } from "~/components/show-users";
 // import { UserNameForm } from "~/components/user-name-form";
 
 export const metadata = {
@@ -12,17 +14,21 @@ export const metadata = {
 };
 
 export default async function SettingsPage() {
-  const user = await getCurrentUser();
+  const userSession = await getCurrentUser();
 
-  if (!user) {
-    redirect("/login");
+  const users = await api.user.getAll.query();
+
+  if (userSession?.role !== UserRole.Admin) {
+    redirect("/settings");
   }
+
+  console.log(users);
 
   return (
     <DashboardShell>
       <DashboardHeader heading="Users" text="Add or remove users." />
       <div className="grid gap-10">
-        {/* <UserNameForm user={{ id: user.id, name: user.name || "" }} /> */}
+        <ShowUsers users={users} />
       </div>
     </DashboardShell>
   );

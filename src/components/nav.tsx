@@ -18,8 +18,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
     return null;
   }
 
-  console.log("path", path);
-
+  // console.log("path", path);
   return (
     <nav className="grid items-start gap-2">
       {items.map((item, index) => {
@@ -30,7 +29,7 @@ export function DashboardNav({ items }: DashboardNavProps) {
               <span
                 className={cn(
                   "group flex items-center rounded-md px-3 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground",
-                  path.includes(item.href) ? "bg-accent" : "transparent",
+                  path.endsWith(item.href) ? "bg-accent" : "transparent",
                   item.disabled && "cursor-not-allowed opacity-80",
                 )}
               >
