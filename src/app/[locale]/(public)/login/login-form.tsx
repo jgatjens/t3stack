@@ -50,7 +50,7 @@ export default function LoginForm({
       const res = await signIn("email", {
         email,
         redirect: false,
-        callbackUrl: "/dashboard",
+        callbackUrl: "/settings",
       });
 
       // If the user is not found, we show an error toast message

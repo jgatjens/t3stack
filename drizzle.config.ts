@@ -8,7 +8,7 @@ export default {
   driver: "pg",
   verbose: true,
   dbCredentials: {
-    connectionString: env.DATABASE_URL,
+    connectionString: env.POSTGRES_URL,
   },
   tablesFilter: ["t3stack_*"],
 } satisfies Config;

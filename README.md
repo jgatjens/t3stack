@@ -37,7 +37,7 @@ npm run db:push
 # -d database
 # -h hostname
 # --data-only only data
-pg_dump -h {DATABASE_HOST} -U {DATABASE_USER} -d {DATABASE_DB} --data-only > ./db/dev_backup.dump
+pg_dump -h {POSTGRES_HOST} -U {POSTGRES_USER} -d {POSTGRES_DB} --data-only > ./db/dev_backup.dump
 
 # clear database data
 docker exec -i t3stack_postgres psql -U postgres -d t3stack < ./db/dev_clear_data.sql
