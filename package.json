@@ -4,8 +4,11 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "db:migration": "dotenv drizzle-kit generate:pg",
+    "db:introspect": "dotenv drizzle-kit introspect:pg",
     "db:push": "dotenv drizzle-kit push:pg",
     "db:studio": "dotenv drizzle-kit studio",
+    "db:drop": "dotenv drizzle-kit drop",
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",

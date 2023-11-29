@@ -3,12 +3,10 @@ import {
   text,
   primaryKey,
   integer,
-  serial,
-  pgTableCreator,
-  // bigint,
-  // varchar,
+  pgTable,
   json,
   pgEnum,
+  uuid,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 
@@ -19,29 +17,32 @@ import type { AdapterAccount } from "@auth/core/adapters";
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
 
+export const roleEnum = pgEnum("role", ["USER", "ADMIN", "ROOT"]);
+export const schemaEnum = pgEnum("schema", ["company_1"]);
+
 // Change name of copy_hub_t3 to create prefixes for tables:
-export const pgTable = pgTableCreator((name) => `t3stack_${name}`);
 
 export const companies = pgTable("company", {
-  id: serial("id").primaryKey(),
+  id: uuid("id").primaryKey().defaultRandom(),
   name: text("name"),
   settings: json("settings"),
 });
 
 export const organizations = pgTable("organization", {
-  id: serial("id").primaryKey(),
-  company_id: text("company_id")
+  id: uuid("id").primaryKey().defaultRandom(),
+  company_id: uuid("company_id")
     .notNull()
     .references(() => companies.id),
   name: text("name"),
+  schema: schemaEnum("schema").default("company_1"),
   settings: json("settings"),
 });
 
-export const roleEnum = pgEnum("role", ["USER", "ADMIN"]);
-
 export const users = pgTable("user", {
-  id: text("id").notNull().primaryKey(),
-  organization_id: text("organization_id").references(() => organizations.id),
+  id: uuid("id").primaryKey().defaultRandom(),
+  organization_id: uuid("organization_id")
+    .notNull()
+    .references(() => organizations.id),
   name: text("name"),
   email: text("email").notNull(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
@@ -52,7 +53,7 @@ export const users = pgTable("user", {
 export const accounts = pgTable(
   "account",
   {
-    userId: text("userId")
+    userId: uuid("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccount["type"]>().notNull(),
@@ -74,7 +75,7 @@ export const accounts = pgTable(
 
 export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").notNull().primaryKey(),
-  userId: text("userId")
+  userId: uuid("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),

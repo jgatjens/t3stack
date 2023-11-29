@@ -4,20 +4,17 @@ import { Client } from "pg";
 import { env } from "~/env.mjs";
 import * as schema from "./schema";
 
+const url = process.env.VERCEL
+  ? env.POSTGRES_URL
+  : env.POSTGRES_URL + "&sslmode=require";
+
 const client = new Client({
-  connectionString: env.POSTGRES_URL,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  connectionString: url,
 });
 
 await client.connect();
+
 export const db = drizzle(client, {
   schema: schema,
+  logger: true,
 });
-
-// Connect to Vercel Postgres
-// import { sql } from "@vercel/postgres";
-// import { drizzle } from "drizzle-orm/vercel-postgres";
-
-// export const db = drizzle(sql);

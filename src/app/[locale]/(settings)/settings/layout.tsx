@@ -21,7 +21,7 @@ export default async function DashboardLayout({
   }
 
   const user = await api.user.getUserByEmail.query({
-    email: userSession?.email || "",
+    email: userSession?.email ?? "",
   });
 
   return (
@@ -32,7 +32,7 @@ export default async function DashboardLayout({
           <UserAccountNav
             user={{
               name: user?.name,
-              image: user?.image || "/avatars/me.jpeg",
+              image: user?.image ?? "/avatars/me.jpeg",
               email: user?.email,
             }}
           />

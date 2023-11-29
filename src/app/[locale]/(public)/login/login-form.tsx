@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useRef, useState } from "react";
+import { type FormEvent, useRef, useState } from "react";
 import { z } from "zod";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";

@@ -12,9 +12,6 @@ export const userRouter = createTRPCRouter({
   update: protectedProcedure
     .input(z.object({ name: z.string().min(3), id: z.string() }))
     .mutation(async ({ ctx, input }) => {
-      // simulate a slow db call
-      await new Promise((resolve) => setTimeout(resolve, 1000));
-
       await ctx.db
         .update(users)
         .set({

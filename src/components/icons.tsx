@@ -12,7 +12,7 @@ import {
   Image,
   Laptop,
   Loader2,
-  LucideProps,
+  type LucideProps,
   Moon,
   MoreVertical,
   Pizza,

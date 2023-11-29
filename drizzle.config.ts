@@ -4,12 +4,11 @@ import { env } from "~/env.mjs";
 
 export default {
   schema: "./src/server/db/schema.ts",
+  schemaFilter: ["public", "company_1"],
   out: "./drizzle/migrations",
   driver: "pg",
   verbose: true,
   dbCredentials: {
-    connectionString: env.POSTGRES_URL + "?sslmode=require",
-    // ssl: false,
+    connectionString: env.POSTGRES_URL + "&sslmode=require",
   },
-  tablesFilter: ["t3stack_*"],
 } satisfies Config;
