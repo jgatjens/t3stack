@@ -2,12 +2,11 @@
 
 import * as React from "react";
 import { useRouter } from "next/navigation";
-
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "~/trpc/react";
 import { useForm } from "react-hook-form";
+import { type User } from "next-auth";
 import * as z from "zod";
-
 import { cn } from "@/lib/utils";
 import { userNameSchema } from "~/lib/validations/user";
 import { buttonVariants } from "@/components/ui/button";
@@ -25,7 +24,7 @@ import { toast } from "sonner";
 import { Icons } from "~/components/icons";
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<any, "id" | "name">;
+  user: Pick<User, "id" | "name">;
 }
 
 type FormData = z.infer<typeof userNameSchema>;
@@ -40,7 +39,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
   } = useForm<FormData>({
     resolver: zodResolver(userNameSchema),
     defaultValues: {
-      name: user?.name || "",
+      name: user?.name ?? "",
     },
   });
 
@@ -58,9 +57,9 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     },
   });
 
-  async function onSubmit(data: FormData) {
+  function onSubmit(data: FormData) {
     setIsSaving(true);
-    await updateUser.mutate({ name: data.name, id: user.id });
+    updateUser.mutate({ name: data.name, id: user.id });
   }
 
   return (

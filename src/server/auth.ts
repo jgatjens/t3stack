@@ -3,16 +3,16 @@ import {
   getServerSession,
   type DefaultSession,
   type NextAuthOptions,
-  Session,
+  type Session,
 } from "next-auth";
-import EmailProvider from "next-auth/providers/email";
+import { type DefaultJWT, type JWT } from "next-auth/jwt";
+import { type UserRole } from "~/constans";
 
+import EmailProvider from "next-auth/providers/email";
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
 import { sendVerificationRequest } from "./send-verification-request";
-import { DefaultJWT, JWT } from "next-auth/jwt";
-import { UserRole } from "~/constans";
 import { eq } from "drizzle-orm";
 
 /**
@@ -74,7 +74,7 @@ export const authOptions: NextAuthOptions = {
     },
     jwt: async ({ token }: { token: JWT }) => {
       const dbUser = await db.query.users.findFirst({
-        where: eq(users.email, token.email || ""),
+        where: eq(users.email, token.email ?? ""),
       });
 
       if (!dbUser) {
@@ -102,7 +102,7 @@ export const authOptions: NextAuthOptions = {
         // Query database to get user by email address (identifier)
         try {
           const dbUser = await db.query.users.findFirst({
-            where: eq(users.email, user.email || ""),
+            where: eq(users.email, user.email ?? ""),
           });
 
           console.log("signIn => dbUser", dbUser);

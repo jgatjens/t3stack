@@ -1,4 +1,4 @@
-import { SendVerificationRequestParams } from "next-auth/providers/email";
+import { type SendVerificationRequestParams } from "next-auth/providers/email";
 import { Resend } from "resend";
 import MagicLinkEmail from "@/emails/magic-link";
 import { env } from "~/env.mjs";
@@ -13,7 +13,7 @@ export async function sendVerificationRequest(
   // console.log("sendVerificationRequest ==>", identifier);
   // console.log("url", url);
 
-  const { data, error } = await resend.emails.send({
+  const { error } = await resend.emails.send({
     from: "Front <onboarding@resend.dev>",
     to: identifier,
     subject: "Resend - please use this magic link to login!",

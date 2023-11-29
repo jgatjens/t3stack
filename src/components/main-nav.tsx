@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useSelectedLayoutSegment } from "next/navigation";
 
 import { cn } from "@/lib/utils";
-import { MainNavItem } from "~/types";
+import { type MainNavItem } from "~/types";
 import { siteConfig } from "~/config/site";
 import { MobileNav } from "~/components/mobile-nav";
 import { Command as IconLogo, X as IconClose } from "lucide-react";

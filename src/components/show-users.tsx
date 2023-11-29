@@ -3,7 +3,7 @@
 import * as React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MoreHorizontal } from "lucide-react";
-import { users } from "~/server/db/schema";
+import { type UsersType } from "~/server/db/schema";
 
 import {
   AlertDialog,
@@ -25,14 +25,14 @@ import {
 import { toast } from "sonner";
 
 interface ShowUsersProps extends React.HTMLAttributes<HTMLDivElement> {
-  users: any[];
+  users: UsersType[];
 }
 
 export function ShowUsers({ users }: ShowUsersProps) {
   return (
     <div className="space-y-8">
       {users?.map((user) => (
-        <div className="flex items-center">
+        <div key={user.id} className="flex items-center">
           <Avatar className="h-9 w-9">
             <AvatarImage src="/avatars/01.png" alt="Avatar" />
             <AvatarFallback>OM</AvatarFallback>
@@ -51,7 +51,7 @@ export function ShowUsers({ users }: ShowUsersProps) {
 }
 
 export function PresetActions() {
-  const [open, setIsOpen] = React.useState(false);
+  const [, setIsOpen] = React.useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = React.useState(false);
 
   return (

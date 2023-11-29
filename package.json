@@ -15,7 +15,7 @@
     "email:magiclink": "cp -r ../react.email/emails/magic-link.tsx ./@/emails/"
   },
   "dependencies": {
-    "@auth/drizzle-adapter": "^0.3.7",
+    "@auth/drizzle-adapter": "^0.3.9",
     "@hookform/resolvers": "^3.1.0",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-avatar": "^1.0.4",
@@ -31,7 +31,6 @@
     "@trpc/next": "^10.37.1",
     "@trpc/react-query": "^10.37.1",
     "@trpc/server": "^10.37.1",
-    "@vercel/postgres": "^0.5.1",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "drizzle-orm": "^0.28.6",

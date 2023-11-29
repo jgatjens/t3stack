@@ -11,7 +11,7 @@ import { getClientsTable } from "~/server/db/global";
 export const userRouter = createTRPCRouter({
   update: publicProcedure
     .input(z.object({ name: z.string().min(3), id: z.string() }))
-    .mutation(async ({ ctx, input }) => {
+    .mutation(async ({ ctx }) => {
       // simulate a slow db call
       const client = getClientsTable("company_1");
       const sql = await ctx.db.select().from(client);

@@ -50,6 +50,8 @@ export const users = pgTable("user", {
   role: roleEnum("role").default("USER"),
 });
 
+export type UsersType = typeof users.$inferInsert;
+
 export const accounts = pgTable(
   "account",
   {
