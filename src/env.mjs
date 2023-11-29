@@ -39,7 +39,7 @@ export const env = createEnv({
    * `NEXT_PUBLIC_`.
    */
   client: {
-    NEXT_PUBLIC_APP_URL: z.string().min(1),
+    // NEXT_PUBLIC_APP_URL: z.string().min(1),
   },
 
   /**
@@ -51,7 +51,7 @@ export const env = createEnv({
     RESEND_API_KEY: process.env.RESEND_API_KEY,
     NEXTAUTH_SECRET: process.env.NEXTAUTH_SECRET,
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
+    // NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     POSTGRES_URL: process.env.POSTGRES_URL,
     // POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
   },
