@@ -4,10 +4,14 @@ import { Client } from "pg";
 import { env } from "~/env.mjs";
 import * as schema from "./schema";
 
-const url = process.env.VERCEL
-  ? env.POSTGRES_URL
-  : env.POSTGRES_URL + "&sslmode=require";
+console.log("process.env.VERCEL", process.env.VERCEL);
 
+const url =
+  Number(process.env.VERCEL) === 1
+    ? env.POSTGRES_URL + "?sslmode=require"
+    : env.POSTGRES_URL;
+
+console.log("url", url);
 const client = new Client({
   connectionString: url,
 });
