@@ -8,7 +8,7 @@ import LoginForm from "./login-form";
 import LocaleSwitcher from "~/components/locale-switcher";
 
 export const metadata: Metadata = {
-  title: "Login Front App",
+  title: "login - frontapp",
   description: "Login Front App System.",
 };
 

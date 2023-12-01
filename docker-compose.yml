@@ -1,7 +1,7 @@
-name: t3stack
+name: frontapp
 services:
   postgres_dev:
-    container_name: t3stack_postgres
+    container_name: frontapp_postgres
     image: postgres:latest
     environment:
       - POSTGRES_USER=${POSTGRES_USER}
@@ -13,7 +13,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
     restart: unless-stopped
   pgadmin:
-    container_name: t3stack_pgadmin
+    container_name: frontapp_pgadmin
     image: dpage/pgadmin4:latest
     environment:
       - PGADMIN_DEFAULT_EMAIL=${PGADMIN_MAIL}
