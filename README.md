@@ -1,6 +1,6 @@
-# T3 Stack custom template
+# FrontApp e
 
-This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
+This is a [t3stack](https://create.t3.gg/) project bootstrapped with `create-t3-app`.
 
 - [Next.js](https://nextjs.org)
 - [NextAuth.js](https://next-auth.js.org)
@@ -16,7 +16,6 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 #example
 npx shadcn-ui@latest add button
 ```
-
 
 # Docker (db and pgadmin)
 
@@ -38,8 +37,8 @@ npm run db:push
 pg_dump -h {POSTGRES_HOST} -U {POSTGRES_USER} -d {POSTGRES_DB} --data-only > ./db/dev_backup.dump
 
 # clear database data
-docker exec -i t3stack_postgres psql -U postgres -d t3stack < ./db/dev_clear_data.sql
+docker exec -i frontapp_postgres psql -U postgres -d frontapp < ./db/dev_clear_data.sql
 
 # restore database on local docker
-docker exec -i t3stack_postgres psql -U postgres -d t3stack < ./db/dev_backup.dump
+docker exec -i frontapp_postgres psql -U postgres -d frontapp < ./db/dev_backup.dump
 ```
