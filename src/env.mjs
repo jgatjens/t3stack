@@ -30,7 +30,11 @@ export const env = createEnv({
         (str) => !str.includes("YOUR_MYSQL_URL_HERE"),
         "You forgot to change the default URL"
       ),
-    // POSTGRES_URL_NON_POOLING: z.string(),
+
+    EMAIL_SERVER_HOST: z.string(),
+    EMAIL_SERVER_PORT: z.string(),
+    EMAIL_FROM_USER: z.string(),
+    EMAIL_PASSWORD: z.string(),
   },
 
   /**
@@ -53,7 +57,10 @@ export const env = createEnv({
     NEXTAUTH_URL: process.env.NEXTAUTH_URL,
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
     POSTGRES_URL: process.env.POSTGRES_URL,
-    // POSTGRES_URL_NON_POOLING: process.env.POSTGRES_URL_NON_POOLING,
+    EMAIL_SERVER_HOST: process.env.EMAIL_SERVER_HOST,
+    EMAIL_SERVER_PORT: process.env.EMAIL_SERVER_PORT,
+    EMAIL_FROM_USER: process.env.EMAIL_FROM_USER,
+    EMAIL_PASSWORD: process.env.EMAIL_PASSWORD,
   },
   /**
    * Run `build` or `dev` with `SKIP_ENV_VALIDATION` to skip env validation. This is especially
