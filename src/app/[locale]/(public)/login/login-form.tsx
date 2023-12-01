@@ -1,6 +1,7 @@
 "use client";
 
-import { type FormEvent, useRef, useState } from "react";
+import type { FormEvent } from "react";
+import { useRef, useState } from "react";
 import { z } from "zod";
 import { signIn } from "next-auth/react";
 import { toast } from "sonner";
@@ -11,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ErrorMessage } from "~/constans";
+import { env } from "~/env.mjs";
 
 interface UserAuthFormProps extends React.HTMLAttributes<HTMLDivElement> {
   translateHeadline: string;
@@ -47,10 +49,12 @@ export default function LoginForm({
 
     try {
       schema.parse({ email });
+
+      const callbackUrl = `${env.NEXT_PUBLIC_APP_URL}/settings`;
       const res = await signIn("email", {
         email,
         redirect: false,
-        callbackUrl: "/settings",
+        callbackUrl,
       });
 
       // If the user is not found, we show an error toast message

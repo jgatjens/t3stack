@@ -1,19 +1,15 @@
+import type { DefaultJWT, JWT } from "next-auth/jwt";
+import type { DefaultSession, NextAuthOptions, Session } from "next-auth";
+import type { UserRole } from "~/constans";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
-import {
-  getServerSession,
-  type DefaultSession,
-  type NextAuthOptions,
-  type Session,
-} from "next-auth";
-import { type DefaultJWT, type JWT } from "next-auth/jwt";
-import { type UserRole } from "~/constans";
+import { getServerSession } from "next-auth";
+import { eq } from "drizzle-orm";
 
 import EmailProvider from "next-auth/providers/email";
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
-import { sendVerificationRequest } from "./send-verification-request";
-import { eq } from "drizzle-orm";
+import { sendVerificationRequest } from "./lib/send-verification-request";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -124,14 +120,14 @@ export const authOptions: NextAuthOptions = {
   session: {
     strategy: "jwt",
   },
-  jwt: {
-    secret: env.NEXTAUTH_SECRET,
-  },
+  // jwt: {
+  //   secret: env.NEXTAUTH_SECRET,
+  // },
   secret: env.NEXTAUTH_SECRET,
   adapter: DrizzleAdapter(db),
 
   pages: {
-    signIn: "/es/login",
+    signIn: "/login",
   },
   /**
    * ...add more providers here.

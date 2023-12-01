@@ -8,6 +8,7 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 - [shadcn](https://ui.shadcn.com/)
 - [tRPC](https://trpc.io)
 - [Postgres](https://tailwindcss.com)
+- [lucide react](https://lucide.dev/guide/packages/lucide-react)
 
 # shadcn add components
 
@@ -16,9 +17,6 @@ This is a [T3 Stack](https://create.t3.gg/) project bootstrapped with `create-t3
 npx shadcn-ui@latest add button
 ```
 
-# icons
-
-[lucide react](https://lucide.dev/guide/packages/lucide-react)
 
 # Docker (db and pgadmin)
 

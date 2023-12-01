@@ -1,5 +1,5 @@
-import { type AvatarProps } from "@radix-ui/react-avatar";
-import { type User } from "next-auth";
+import type { AvatarProps } from "@radix-ui/react-avatar";
+import type { User } from "next-auth";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { User as IconUser } from "lucide-react";
 

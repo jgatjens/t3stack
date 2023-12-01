@@ -3,9 +3,9 @@
 import * as React from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { api } from "~/trpc/react";
 import { useForm } from "react-hook-form";
-import { type User } from "next-auth";
+import type { User } from "next-auth";
+import { api } from "~/trpc/react";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
 import { userNameSchema } from "~/lib/validations/user";

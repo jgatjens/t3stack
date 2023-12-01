@@ -1,9 +1,9 @@
 "use client";
 
+import type { UsersType } from "~/server/db/schema";
 import * as React from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MoreHorizontal } from "lucide-react";
-import { type UsersType } from "~/server/db/schema";
 
 import {
   AlertDialog,

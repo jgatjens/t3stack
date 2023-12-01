@@ -12,7 +12,6 @@ import {
   Image,
   Laptop,
   Loader2,
-  type LucideProps,
   Moon,
   MoreVertical,
   Pizza,
@@ -23,6 +22,7 @@ import {
   Twitter,
   User,
   X,
+  type LucideProps,
   type LucideIcon,
 } from "lucide-react";
 
