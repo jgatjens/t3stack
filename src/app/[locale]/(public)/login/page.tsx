@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
+import Image from "next/image";
 import Link from "next/link";
 
 import { getServerAuthSession } from "~/server/auth";
@@ -28,6 +29,13 @@ export default async function LoginPage() {
 
         <div className="relative flex-col bg-muted p-6 py-10 text-white dark:border-r lg:flex lg:h-full lg:p-10">
           <div className="absolute inset-0 bg-zinc-900" />
+          <Image
+            src="/assets/login-3.jpg"
+            width={1280}
+            height={843}
+            alt="working women"
+            className="absolute inset-0 hidden h-full w-full object-cover opacity-40 lg:block"
+          />
           <div className="relative z-20 flex items-center text-lg font-medium">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -47,18 +55,18 @@ export default async function LoginPage() {
             </span>
           </div>
           <div className="relative z-20 mt-auto hidden lg:block">
-            <blockquote className="space-y-2">
+            {/* <blockquote className="space-y-2">
               <p className="text-lg">
                 &ldquo;Consequat tempor amet dolore voluptate deserunt. Pariatur
                 amet veniam duis adipisicing. Sint esse eiusmod cupidatat
                 laborum aliquip non non esse commodo do irure.&rdquo;
               </p>
               <footer className="text-sm">Comentario de Usuario</footer>
-            </blockquote>
+            </blockquote> */}
           </div>
         </div>
         <div className="mt-10 px-6 lg:mt-0 lg:p-8 lg:px-0">
-          <div className="mx-auto flex w-full flex-col justify-center space-y-6 sm:w-[350px]">
+          <div className="flex w-full flex-col justify-start space-y-6 md:mx-auto md:w-[350px] md:justify-center">
             <LoginForm
               translateHeadline={t("Login.headline")}
               translateSubheadline={t("Login.subheadline")}

@@ -24,6 +24,9 @@ export default async function DashboardLayout({
     email: userSession?.email ?? "",
   });
 
+  // get random images from 01.png to 0.5.png
+  const randomImage = Math.floor(Math.random() * 5) + 1;
+
   return (
     <div className="flex min-h-screen flex-col space-y-6">
       <header className="sticky top-0 z-40 border-b bg-background">
@@ -32,7 +35,7 @@ export default async function DashboardLayout({
           <UserAccountNav
             user={{
               name: user?.name,
-              image: user?.image ?? "/avatars/me.jpeg",
+              image: user?.image ?? `/avatars/0${randomImage}.png`,
               email: user?.email,
             }}
           />

@@ -29,12 +29,13 @@ interface ShowUsersProps extends React.HTMLAttributes<HTMLDivElement> {
 }
 
 export function ShowUsers({ users }: ShowUsersProps) {
+  const randomImage = () => Math.floor(Math.random() * 5) + 1;
   return (
     <div className="space-y-8">
       {users?.map((user) => (
         <div key={user.id} className="flex items-center">
           <Avatar className="h-9 w-9">
-            <AvatarImage src="/avatars/01.png" alt="Avatar" />
+            <AvatarImage src={`/avatars/0${randomImage()}.png`} alt="Avatar" />
             <AvatarFallback>OM</AvatarFallback>
           </Avatar>
           <div className="ml-4 space-y-1">

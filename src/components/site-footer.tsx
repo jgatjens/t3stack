@@ -3,7 +3,7 @@ import * as React from "react";
 import { siteConfig } from "~/config/site";
 import { cn } from "@/lib/utils";
 import { Command as IconLogo } from "lucide-react";
-// import { ModeToggle } from "@/components/mode-toggle";
+import { ModeToggle } from "~/components/mode-toggle";
 
 export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
   return (
@@ -33,7 +33,7 @@ export function SiteFooter({ className }: React.HTMLAttributes<HTMLElement>) {
             .
           </p>
         </div>
-        {/* <ModeToggle /> */}
+        <ModeToggle />
       </div>
     </footer>
   );

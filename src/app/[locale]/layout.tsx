@@ -1,8 +1,9 @@
 import "~/styles/globals.css";
 import { cookies } from "next/headers";
-import { TRPCReactProvider } from "~/trpc/react";
 import { GeistSans } from "geist/font/sans";
 import { Toaster } from "sonner";
+import { TRPCReactProvider } from "~/trpc/react";
+import { ThemeProvider } from "~/components/theme-provider";
 
 // Can be imported from a shared config
 // const locales = ["en", "es"];
@@ -27,7 +28,9 @@ export default function RootLayout({
     <html lang={locale}>
       <body className={GeistSans.className}>
         <TRPCReactProvider cookies={cookies().toString()}>
-          {children}
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            {children}
+          </ThemeProvider>
           <Toaster closeButton />
         </TRPCReactProvider>
       </body>

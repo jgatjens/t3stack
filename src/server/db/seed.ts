@@ -60,21 +60,21 @@ const main = async () => {
   dataUsers.push({
     organization_id: dataOrganization[0]?.id ?? "",
     email: "estebangatjens@gmail.com",
-    name: "Esteban Gatjens",
+    name: "Dieguito Menjengo",
     role: "ADMIN",
   });
 
   dataUsers.push({
     organization_id: dataOrganization[0]?.id ?? "",
     email: "andgatjens@gmail.com",
-    name: "Andres Gatjens",
+    name: "Yezito Quesito",
     role: "ADMIN",
   });
 
   dataUsers.push({
     organization_id: dataOrganization[0]?.id ?? "",
     email: "gatjensb@gmail.com",
-    name: "Bruno Gatjens",
+    name: "Matthew Elpeque",
     role: "ADMIN",
   });
 

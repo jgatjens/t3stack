@@ -100,6 +100,7 @@ export default function LoginForm({
                   id="email"
                   ref={inputRef}
                   name="email"
+                  className="py-6"
                   placeholder="ejecutivo@banco.com"
                   type="email"
                   autoCapitalize="none"
@@ -108,7 +109,7 @@ export default function LoginForm({
                   disabled={isLoading}
                 />
               </div>
-              <Button disabled={isLoading}>
+              <Button className="py-6 uppercase" disabled={isLoading}>
                 {isLoading && (
                   <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                 )}

@@ -23,7 +23,7 @@ export default async function LoginPage() {
       <div className="container relative h-screen flex-col items-center justify-center ">
         {/* <LocaleSwitcher /> */}
 
-        <div className="px-6 py-6 text-left lg:py-10 lg:pt-10">
+        <div className="py-6 text-left lg:py-10 lg:pt-10">
           {/* create react copy for terms of service */}
 
           <h1 className="mb-6 text-2xl font-semibold capitalize tracking-tight">
