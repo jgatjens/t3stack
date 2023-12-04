@@ -1,4 +1,5 @@
 import { type Icons } from "~/components/icons";
+import type { UserRole } from "~/constans";
 
 export type SiteConfig = {
   name: string;
@@ -20,10 +21,11 @@ export type NavItem = {
 
 export type MainNavItem = NavItem;
 
-export type DashboardConfig = {
+export type SettingsConfig = {
   mainNav: MainNavItem[];
   sidebarNav: SidebarNavItem[];
 };
+
 export type SidebarNavItem = {
   title: string;
   disabled?: boolean;
@@ -32,10 +34,12 @@ export type SidebarNavItem = {
 } & (
   | {
       href: string;
+      role?: UserRole;
       items?: never;
     }
   | {
       href?: string;
+      role: UserRole;
       items: NavLink[];
     }
 );

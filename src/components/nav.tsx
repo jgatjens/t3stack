@@ -8,9 +8,10 @@ import { Icons } from "~/components/icons";
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
+  role: "USER" | "ADMIN";
 }
 
-export function DashboardNav({ items }: DashboardNavProps) {
+export function DashboardNav({ items, role }: DashboardNavProps) {
   const path = usePathname();
 
   if (!items?.length) {
@@ -20,8 +21,13 @@ export function DashboardNav({ items }: DashboardNavProps) {
   // console.log("path", path);
   return (
     <nav className="grid items-start gap-2">
-      {items.map((item, index) => {
+      {items.map((item: SidebarNavItem, index) => {
         const Icon = Icons[item.icon ?? "arrowRight"];
+
+        if (item.role && item.role !== role) {
+          return null;
+        }
+
         return (
           item.href && (
             <Link key={index} href={item.disabled ? "/" : item.href}>

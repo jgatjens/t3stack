@@ -4,9 +4,8 @@ import type { FormEvent } from "react";
 import { useRef, useState } from "react";
 import { z } from "zod";
 import { signIn } from "next-auth/react";
-import { toast } from "sonner";
-
 import { cn } from "@/lib/utils";
+import { useToast } from "@/components/ui/use-toast";
 import { Icons } from "@/components/ui/icons";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -33,6 +32,7 @@ export default function LoginForm({
   translateNoUserFound,
   ...props
 }: UserAuthFormProps) {
+  const { toast } = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isEmailSent, setIsEmailSent] = useState<boolean>(false);
@@ -59,19 +59,29 @@ export default function LoginForm({
 
       // If the user is not found, we show an error toast message
       if (res?.error === ErrorMessage.AccessDenied) {
-        toast.error(translateNoUserFound + email);
+        toast({
+          variant: "destructive",
+          title: "¡Oh, oh! Algo salió mal.",
+          description: translateNoUserFound + email,
+        });
         inputRef.current?.focus();
       }
 
       // If everything is fine, we show a success toast message
       if (!res?.error) {
         setIsEmailSent(true);
-        toast.success(translateEmailSent);
+        toast({
+          description: translateEmailSent,
+        });
       }
 
       setIsLoading(false);
     } catch (error) {
-      toast.error(translateInvalidEmail);
+      toast({
+        variant: "destructive",
+        title: "¡Oh, oh! Algo salió mal.",
+        description: translateInvalidEmail,
+      });
       setIsLoading(false);
       inputRef.current?.focus();
       return;
@@ -79,7 +89,7 @@ export default function LoginForm({
   }
 
   return isEmailSent ? (
-    <p className="text-left text-base text-black">{translateEmailSent}</p>
+    <p className="text-left text-base">{translateEmailSent}</p>
   ) : (
     <>
       <div className="flex flex-col space-y-2 text-left">

@@ -7,6 +7,7 @@ import {
   json,
   pgEnum,
   uuid,
+  serial,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 
@@ -17,7 +18,7 @@ import type { AdapterAccount } from "@auth/core/adapters";
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
 
-export const roleEnum = pgEnum("role", ["USER", "ADMIN", "ROOT"]);
+export const roleEnum = pgEnum("role", ["USER", "ADMIN"]);
 export const schemaEnum = pgEnum("schema", ["company_1"]);
 
 // Change name of copy_hub_t3 to create prefixes for tables:
@@ -38,16 +39,18 @@ export const organizations = pgTable("organization", {
   settings: json("settings"),
 });
 
+export type OrganizationType = typeof organizations.$inferInsert;
+
 export const users = pgTable("user", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: serial("id").notNull().primaryKey(),
   organization_id: uuid("organization_id")
     .notNull()
     .references(() => organizations.id),
-  name: text("name"),
-  email: text("email").notNull(),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-  role: roleEnum("role").default("USER"),
+  role: roleEnum("role").notNull(),
 });
 
 export type UsersType = typeof users.$inferInsert;
@@ -55,7 +58,7 @@ export type UsersType = typeof users.$inferInsert;
 export const accounts = pgTable(
   "account",
   {
-    userId: uuid("userId")
+    userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccount["type"]>().notNull(),
@@ -77,7 +80,7 @@ export const accounts = pgTable(
 
 export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").notNull().primaryKey(),
-  userId: uuid("userId")
+  userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),

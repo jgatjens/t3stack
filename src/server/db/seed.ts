@@ -85,6 +85,13 @@ const main = async () => {
     role: "ADMIN",
   });
 
+  dataUsers.push({
+    organization_id: dataOrganization[0]?.id ?? "",
+    email: "z1priano@gmail.com",
+    name: "Matias Benano",
+    role: "USER",
+  });
+
   await db.insert(users).values(dataUsers);
 
   console.log("Seed done");

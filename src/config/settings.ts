@@ -1,6 +1,7 @@
-import type { DashboardConfig } from "~/types";
+import { UserRole } from "~/constans";
+import type { SettingsConfig } from "~/types";
 
-export const dashboardConfig: DashboardConfig = {
+export const settingsConfig: SettingsConfig = {
   mainNav: [
     {
       title: "Dashboard",
@@ -14,12 +15,13 @@ export const dashboardConfig: DashboardConfig = {
   ],
   sidebarNav: [
     {
-      title: "Settings",
+      title: "Perfil",
       href: "/settings",
       icon: "settings",
     },
     {
-      title: "Users",
+      title: "Usuarios",
+      role: UserRole.Admin,
       href: "/settings/users",
       icon: "post",
     },
