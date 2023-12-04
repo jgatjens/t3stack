@@ -34,17 +34,20 @@ export default async function SettingsLayout({
           <MainNav items={settingsConfig.mainNav} />
           <UserAccountNav
             user={{
-              name: user?.name,
+              name: user?.name ?? "",
               image: user?.image ?? `/avatars/0${randomImage}.png`,
-              email: user?.email,
-              role: user?.role,
+              email: user?.email ?? "",
+              role: user?.role ?? "USER",
             }}
           />
         </div>
       </header>
       <div className="container grid flex-1 gap-12 md:grid-cols-[200px_1fr]">
         <aside className="hidden w-[200px] flex-col md:flex">
-          <DashboardNav role={user?.role} items={settingsConfig.sidebarNav} />
+          <DashboardNav
+            items={settingsConfig.sidebarNav}
+            role={user?.role ?? "USER"}
+          />
         </aside>
         <main className="flex w-full flex-1 flex-col overflow-hidden">
           {children}
