@@ -1,15 +1,16 @@
-import type { DefaultJWT, JWT } from "next-auth/jwt";
-import type { DefaultSession, NextAuthOptions, Session } from "next-auth";
-import type { UserRole } from "~/constans";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import EmailProvider from "next-auth/providers/email";
 import { getServerSession } from "next-auth";
 import { eq } from "drizzle-orm";
 
-import EmailProvider from "next-auth/providers/email";
+import type { DefaultSession, NextAuthOptions, Session } from "next-auth";
+import type { DefaultJWT, JWT } from "next-auth/jwt";
+import type { UserRole } from "~/constans";
+
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
-import { sendVerificationRequest } from "./lib/send-verification-request";
+import { sendVerificationRequest } from "./send-verification-request";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -34,7 +35,7 @@ declare module "next-auth" {
 
 declare module "next-auth/adapters" {
   export interface AdapterUser {
-    role?: UserRole;
+    role: UserRole;
     organization_id?: string;
   }
 }

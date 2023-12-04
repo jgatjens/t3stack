@@ -6,8 +6,8 @@ export default function UsersLoading() {
   return (
     <DashboardShell>
       <DashboardHeader
-        heading="Users"
-        text="Manage users, create new users, and more."
+        heading="Usuarios"
+        text="Administre usuarios, cree nuevos y más."
       />
       <div className="grid gap-10">
         <CardSkeleton />

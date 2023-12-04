@@ -6,8 +6,8 @@ export default function UsersLoading() {
   return (
     <DashboardShell>
       <DashboardHeader
-        heading="Settings"
-        text="Update current user settings."
+        heading="Perfil"
+        text="Actualice la configuración de usuario actual."
       />
       <div className="grid gap-10">
         <CardSkeleton />

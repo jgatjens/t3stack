@@ -4,7 +4,6 @@ import { getCurrentUser } from "~/lib/session";
 import { DashboardHeader } from "~/components/header";
 import { DashboardShell } from "~/components/shell";
 import { api } from "~/trpc/server";
-import { UserRole } from "~/constans";
 import { ShowUsers } from "~/components/show-users";
 import { Link } from "~/navigation";
 import { Plus as PlusIcon } from "lucide-react";
@@ -16,23 +15,22 @@ export const metadata = {
 
 export default async function UsersPage() {
   const userSession = await getCurrentUser();
-
   const users = await api.user.getAll.query();
 
-  if (userSession?.role !== UserRole.Admin) {
+  if (userSession?.role !== "ADMIN") {
     redirect("/settings");
   }
 
   return (
     <DashboardShell>
       <DashboardHeader
-        heading="Users"
-        text="Manage users, create new users, and more."
+        heading="Usuarios"
+        text="Administre usuarios, cree nuevos y más."
       >
-        <Link href="/settings/users/create">
+        <Link href="/settings/users/admin">
           <Button className="py-5">
             <PlusIcon className="mr-2 h-4 w-4" />
-            Create User
+            Nuevo usuario
           </Button>
         </Link>
       </DashboardHeader>

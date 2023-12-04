@@ -17,7 +17,7 @@ import type { AdapterAccount } from "@auth/core/adapters";
  * @see https://orm.drizzle.team/docs/goodies#multi-project-schema
  */
 
-export const roleEnum = pgEnum("role", ["USER", "ADMIN", "ROOT"]);
+export const roleEnum = pgEnum("role", ["USER", "ADMIN"]);
 export const schemaEnum = pgEnum("schema", ["company_1"]);
 
 // Change name of copy_hub_t3 to create prefixes for tables:
@@ -38,16 +38,18 @@ export const organizations = pgTable("organization", {
   settings: json("settings"),
 });
 
+export type OrganizationType = typeof organizations.$inferInsert;
+
 export const users = pgTable("user", {
   id: uuid("id").primaryKey().defaultRandom(),
   organization_id: uuid("organization_id")
     .notNull()
     .references(() => organizations.id),
   name: text("name"),
-  email: text("email").notNull(),
+  email: text("email").notNull().unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
-  role: roleEnum("role").default("USER"),
+  role: roleEnum("role").notNull(),
 });
 
 export type UsersType = typeof users.$inferInsert;
