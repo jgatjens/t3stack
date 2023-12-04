@@ -36,7 +36,7 @@ export default async function UsersPage() {
         </Link>
       </DashboardHeader>
       <div className="grid gap-10">
-        <ShowUsers users={users} />
+        <ShowUsers users={users} currentUserId={userSession.id} />
       </div>
     </DashboardShell>
   );

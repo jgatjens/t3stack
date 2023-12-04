@@ -20,6 +20,15 @@ export const userRouter = createTRPCRouter({
         })
         .where(eq(users.email, input.email));
     }),
+  delete: protectedProcedure
+    .input(
+      z.object({
+        email: z.string(),
+      }),
+    )
+    .mutation(async ({ ctx, input }) => {
+      return await ctx.db.delete(users).where(eq(users.email, input.email));
+    }),
 
   update: protectedProcedure
     .input(

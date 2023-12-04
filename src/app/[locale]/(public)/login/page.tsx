@@ -59,16 +59,6 @@ export default async function LoginPage() {
               {t("Login.welcome")} <b>FRONT</b>
             </span>
           </div>
-          <div className="relative z-20 mt-auto hidden lg:block">
-            {/* <blockquote className="space-y-2">
-              <p className="text-lg">
-                &ldquo;Consequat tempor amet dolore voluptate deserunt. Pariatur
-                amet veniam duis adipisicing. Sint esse eiusmod cupidatat
-                laborum aliquip non non esse commodo do irure.&rdquo;
-              </p>
-              <footer className="text-sm">Comentario de Usuario</footer>
-            </blockquote> */}
-          </div>
         </div>
         <div className="mt-10 px-6 lg:mt-0 lg:p-8 lg:px-0">
           <div className="flex w-full flex-col justify-start space-y-6 md:mx-auto md:w-[350px] md:justify-center">

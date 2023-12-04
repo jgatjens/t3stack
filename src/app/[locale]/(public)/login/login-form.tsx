@@ -89,7 +89,7 @@ export default function LoginForm({
   }
 
   return isEmailSent ? (
-    <p className="text-left text-base text-black">{translateEmailSent}</p>
+    <p className="text-left text-base">{translateEmailSent}</p>
   ) : (
     <>
       <div className="flex flex-col space-y-2 text-left">

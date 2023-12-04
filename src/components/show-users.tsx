@@ -1,9 +1,12 @@
 "use client";
 
-import type { UsersType } from "~/server/db/schema";
 import * as React from "react";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { MoreHorizontal } from "lucide-react";
+import { useRouter } from "next/navigation";
+
+import type { UsersType } from "~/server/db/schema";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { api } from "~/trpc/react";
 
 import {
   AlertDialog,
@@ -19,16 +22,17 @@ import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuSeparator,
+  // DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { useToast } from "@/components/ui/use-toast";
 
 interface ShowUsersProps extends React.HTMLAttributes<HTMLDivElement> {
   users: UsersType[];
+  currentUserId: number;
 }
 
-export function ShowUsers({ users }: ShowUsersProps) {
+export function ShowUsers({ users, currentUserId }: ShowUsersProps) {
   const randomImage = () => Math.floor(Math.random() * 5) + 1;
   return (
     <div className="space-y-8">
@@ -47,7 +51,7 @@ export function ShowUsers({ users }: ShowUsersProps) {
           </div>
 
           <div className="ml-auto font-medium">
-            <PresetActions />
+            {user.id !== currentUserId && <PresetActions email={user.email} />}
           </div>
         </div>
       ))}
@@ -55,10 +59,26 @@ export function ShowUsers({ users }: ShowUsersProps) {
   );
 }
 
-export function PresetActions() {
+export function PresetActions({ email }: { email: string }) {
   const { toast } = useToast();
-  const [, setIsOpen] = React.useState(false);
+  const router = useRouter();
   const [showDeleteDialog, setShowDeleteDialog] = React.useState(false);
+
+  const deleteUser = api.user.delete.useMutation({
+    onSuccess: () => {
+      toast({ title: "Su usuario fue eliminado exitosamente." });
+      setShowDeleteDialog(false);
+      router.refresh();
+    },
+    onError: (error) => {
+      setShowDeleteDialog(false);
+      toast({
+        variant: "destructive",
+        title: "¡Oh, oh! Algo salió mal.",
+        description: error.message,
+      });
+    },
+  });
 
   return (
     <>
@@ -70,10 +90,10 @@ export function PresetActions() {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end">
-          <DropdownMenuItem onSelect={() => setIsOpen(true)}>
+          {/* <DropdownMenuItem onSelect={() => setIsOpen(true)}>
             Edit
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
+          <DropdownMenuSeparator /> */}
           <DropdownMenuItem
             onSelect={() => setShowDeleteDialog(true)}
             className="text-red-600"
@@ -86,20 +106,18 @@ export function PresetActions() {
       <AlertDialog open={showDeleteDialog} onOpenChange={setShowDeleteDialog}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you sure absolutely sure?</AlertDialogTitle>
+            <AlertDialogTitle>¿Estás absolutamente seguro??</AlertDialogTitle>
             <AlertDialogDescription>
-              This action cannot be undone. This will permanently delete this
-              account.
+              Esta acción no se puede deshacer. Se eliminará permanentemente
+              esta cuenta.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
             <AlertDialogCancel>Cancel</AlertDialogCancel>
             <Button
+              disabled={deleteUser.isLoading}
               variant="destructive"
-              onClick={() => {
-                setShowDeleteDialog(false);
-                toast({ title: "This preset has been deleted." });
-              }}
+              onClick={() => deleteUser.mutate({ email })}
             >
               Delete
             </Button>
