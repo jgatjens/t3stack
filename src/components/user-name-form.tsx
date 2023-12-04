@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import type { User } from "next-auth";
+import type { UsersType } from "~/server/db/schema";
 import { api } from "~/trpc/react";
 import * as z from "zod";
 import { cn } from "@/lib/utils";
@@ -20,16 +20,17 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { toast } from "sonner";
 import { Icons } from "~/components/icons";
+import { useToast } from "@/components/ui/use-toast";
 
 interface UserNameFormProps extends React.HTMLAttributes<HTMLFormElement> {
-  user: Pick<User, "id" | "name">;
+  user: Pick<UsersType, "name" | "email">;
 }
 
 type FormData = z.infer<typeof userNameSchema>;
 
 export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
+  const { toast } = useToast();
   const router = useRouter();
 
   const {
@@ -40,46 +41,52 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
     resolver: zodResolver(userNameSchema),
     defaultValues: {
       name: user?.name ?? "",
+      email: user?.email ?? "",
     },
   });
 
   const [isSaving, setIsSaving] = React.useState<boolean>(false);
 
-  const updateUser = api.user.update.useMutation({
+  const updateName = api.user.updateName.useMutation({
     onSuccess: () => {
-      toast.success("Your name has been updated.");
+      toast({ title: "Su nombre ha sido actualizado." });
       setIsSaving(false);
       router.refresh();
     },
     onError: (error) => {
-      toast.error(error.message);
+      toast({
+        variant: "destructive",
+        title: "¡Oh, oh! Algo salió mal.",
+        description: error.message,
+      });
       setIsSaving(false);
     },
   });
 
   function onSubmit(data: FormData) {
     setIsSaving(true);
-    updateUser.mutate({ name: data.name, id: user.id });
+    updateName.mutate({ name: data.name, email: user?.email });
   }
+  // debugger;
 
   return (
     <form
       className={cn(className)}
-      onSubmit={handleSubmit(onSubmit)}
       {...props}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <Card>
         <CardHeader>
-          <CardTitle>Your Name</CardTitle>
+          <CardTitle>Tu nombre</CardTitle>
           <CardDescription>
-            Please enter your full name or a display name you are comfortable
-            with.
+            Por favor ingrese su nombre completo o un nombre para mostrar con el
+            que se sienta cómodo.
           </CardDescription>
         </CardHeader>
         <CardContent>
           <div className="grid gap-1">
             <Label className="sr-only" htmlFor="name">
-              Name
+              Nombre
             </Label>
             <Input
               id="name"
@@ -101,7 +108,7 @@ export function UserNameForm({ user, className, ...props }: UserNameFormProps) {
             {isSaving && (
               <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
             )}
-            <span>Save</span>
+            <span>Guardar</span>
           </button>
         </CardFooter>
       </Card>

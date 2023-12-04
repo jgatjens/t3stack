@@ -1,15 +1,16 @@
-import type { DefaultJWT, JWT } from "next-auth/jwt";
-import type { DefaultSession, NextAuthOptions, Session } from "next-auth";
-import type { UserRole } from "~/constans";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
+import EmailProvider from "next-auth/providers/email";
 import { getServerSession } from "next-auth";
 import { eq } from "drizzle-orm";
 
-import EmailProvider from "next-auth/providers/email";
+import type { DefaultSession, NextAuthOptions, Session } from "next-auth";
+import type { DefaultJWT, JWT } from "next-auth/jwt";
+import type { UserRole } from "~/constans";
+
 import { env } from "~/env.mjs";
 import { db } from "~/server/db";
 import { users } from "~/server/db/schema";
-import { sendVerificationRequest } from "./lib/send-verification-request";
+import { sendVerificationRequest } from "./send-verification-request";
 
 /**
  * Module augmentation for `next-auth` types. Allows us to add custom properties to the `session`
@@ -21,7 +22,7 @@ import { sendVerificationRequest } from "./lib/send-verification-request";
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      id: string;
+      id: number;
       role: UserRole;
       organization_id: string;
     } & DefaultSession["user"];
@@ -43,9 +44,8 @@ declare module "next-auth/jwt" {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
-
   interface JWT extends DefaultJWT {
-    id: string;
+    id: number;
     role: UserRole;
     emailVerified: Date | null;
   }

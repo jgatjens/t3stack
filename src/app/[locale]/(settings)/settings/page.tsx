@@ -25,11 +25,11 @@ export default async function SettingsPage() {
   return (
     <DashboardShell>
       <DashboardHeader
-        heading="Settings"
-        text="Update current user settings."
+        heading="Perfil"
+        text="Actualice la configuración de usuario actual."
       />
       <div className="grid gap-10">
-        <UserNameForm user={{ id: user.id, name: user.name ?? "" }} />
+        <UserNameForm user={{ email: user.email, name: user.name ?? "" }} />
       </div>
     </DashboardShell>
   );
