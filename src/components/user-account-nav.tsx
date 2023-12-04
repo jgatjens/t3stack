@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import type { User } from "next-auth";
 import { signOut } from "next-auth/react";
 
 import {
@@ -12,9 +11,10 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "~/components/user-avatar";
+import type { UsersType } from "~/server/db/schema";
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
-  user: Pick<User, "name" | "image" | "email">;
+  user: Pick<UsersType, "name" | "image" | "email" | "role">;
 }
 
 export function UserAccountNav({ user }: UserAccountNavProps) {
@@ -40,14 +40,14 @@ export function UserAccountNav({ user }: UserAccountNavProps) {
         <DropdownMenuSeparator />
 
         <DropdownMenuItem asChild>
-          <Link href="/settings">Settings</Link>
+          <Link href="/settings">Perfil</Link>
         </DropdownMenuItem>
-        {/* <DropdownMenuItem asChild>
-          <Link href="/dashboard/billing">Billing</Link>
-        </DropdownMenuItem> */}
-        <DropdownMenuItem asChild>
-          <Link href="/settings/users">Users</Link>
-        </DropdownMenuItem>
+
+        {user.role === "ADMIN" && (
+          <DropdownMenuItem asChild>
+            <Link href="/settings/users">Usuarios</Link>
+          </DropdownMenuItem>
+        )}
         <DropdownMenuSeparator />
         <DropdownMenuItem
           className="cursor-pointer"

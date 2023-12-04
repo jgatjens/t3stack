@@ -22,7 +22,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { toast } from "sonner";
+import { useToast } from "@/components/ui/use-toast";
 
 interface ShowUsersProps extends React.HTMLAttributes<HTMLDivElement> {
   users: UsersType[];
@@ -41,7 +41,11 @@ export function ShowUsers({ users }: ShowUsersProps) {
           <div className="ml-4 space-y-1">
             <p className="text-sm font-medium leading-none">{user?.name}</p>
             <p className="text-sm text-muted-foreground">{user.email}</p>
+            <p className="text-sm font-medium lowercase leading-none">
+              {user?.role}
+            </p>
           </div>
+
           <div className="ml-auto font-medium">
             <PresetActions />
           </div>
@@ -52,6 +56,7 @@ export function ShowUsers({ users }: ShowUsersProps) {
 }
 
 export function PresetActions() {
+  const { toast } = useToast();
   const [, setIsOpen] = React.useState(false);
   const [showDeleteDialog, setShowDeleteDialog] = React.useState(false);
 
@@ -59,7 +64,7 @@ export function PresetActions() {
     <>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="secondary">
+          <Button variant="secondary" className="mr-2">
             <span className="sr-only">Actions</span>
             <MoreHorizontal className="h-4 w-4" />
           </Button>
@@ -93,7 +98,7 @@ export function PresetActions() {
               variant="destructive"
               onClick={() => {
                 setShowDeleteDialog(false);
-                toast.success("This preset has been deleted.");
+                toast({ title: "This preset has been deleted." });
               }}
             >
               Delete

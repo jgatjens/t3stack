@@ -1,7 +1,7 @@
 import "~/styles/globals.css";
 import { cookies } from "next/headers";
 import { GeistSans } from "geist/font/sans";
-import { Toaster } from "sonner";
+import { Toaster } from "@/components/ui/toaster";
 import { TRPCReactProvider } from "~/trpc/react";
 import { ThemeProvider } from "~/components/theme-provider";
 
@@ -25,13 +25,13 @@ export default function RootLayout({
   // if (!locales.includes(locale as any)) notFound();
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className={GeistSans.className}>
         <TRPCReactProvider cookies={cookies().toString()}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
           </ThemeProvider>
-          <Toaster closeButton />
+          <Toaster />
         </TRPCReactProvider>
       </body>
     </html>
