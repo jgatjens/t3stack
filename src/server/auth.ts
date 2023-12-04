@@ -22,7 +22,7 @@ import { sendVerificationRequest } from "./send-verification-request";
 declare module "next-auth" {
   interface Session extends DefaultSession {
     user: {
-      id: string;
+      id: number;
       role: UserRole;
       organization_id: string;
     } & DefaultSession["user"];
@@ -35,7 +35,7 @@ declare module "next-auth" {
 
 declare module "next-auth/adapters" {
   export interface AdapterUser {
-    role: UserRole;
+    role?: UserRole;
     organization_id?: string;
   }
 }
@@ -44,9 +44,8 @@ declare module "next-auth/jwt" {
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
    */
-
   interface JWT extends DefaultJWT {
-    id: string;
+    id: number;
     role: UserRole;
     emailVerified: Date | null;
   }

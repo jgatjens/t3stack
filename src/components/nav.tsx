@@ -5,11 +5,10 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import { Icons } from "~/components/icons";
-import type { UserRole } from "~/constans";
 
 interface DashboardNavProps {
   items: SidebarNavItem[];
-  role: UserRole.Admin | UserRole.User;
+  role: "USER" | "ADMIN";
 }
 
 export function DashboardNav({ items, role }: DashboardNavProps) {

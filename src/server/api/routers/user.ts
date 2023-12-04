@@ -38,7 +38,7 @@ export const userRouter = createTRPCRouter({
           organization_id: input.name,
           role: input.role,
         })
-        .where(eq(users.id, input.email));
+        .where(eq(users.email, input.email));
     }),
   create: protectedProcedure
     .input(

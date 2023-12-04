@@ -12,7 +12,7 @@ export const userNameSchema = z.object({
 });
 
 export const userAdminSchema = z.object({
-  id: z.string(),
+  id: z.number(),
   name: z
     .string()
     .min(3, {

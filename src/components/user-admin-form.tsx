@@ -69,8 +69,8 @@ export function UserAdminForm({
   const form = useForm<FormData>({
     resolver: zodResolver(userAdminSchema),
     defaultValues: {
-      id: user?.id ?? "",
-      name: user?.name ?? "",
+      id: user?.id,
+      name: user?.name,
       role: user?.role,
       email: user?.email,
     },

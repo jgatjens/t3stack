@@ -7,6 +7,7 @@ import {
   json,
   pgEnum,
   uuid,
+  serial,
 } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 
@@ -41,11 +42,11 @@ export const organizations = pgTable("organization", {
 export type OrganizationType = typeof organizations.$inferInsert;
 
 export const users = pgTable("user", {
-  id: uuid("id").primaryKey().defaultRandom(),
+  id: serial("id").notNull().primaryKey(),
   organization_id: uuid("organization_id")
     .notNull()
     .references(() => organizations.id),
-  name: text("name"),
+  name: text("name").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: timestamp("emailVerified", { mode: "date" }),
   image: text("image"),
@@ -57,7 +58,7 @@ export type UsersType = typeof users.$inferInsert;
 export const accounts = pgTable(
   "account",
   {
-    userId: uuid("userId")
+    userId: text("userId")
       .notNull()
       .references(() => users.id, { onDelete: "cascade" }),
     type: text("type").$type<AdapterAccount["type"]>().notNull(),
@@ -79,7 +80,7 @@ export const accounts = pgTable(
 
 export const sessions = pgTable("session", {
   sessionToken: text("sessionToken").notNull().primaryKey(),
-  userId: uuid("userId")
+  userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
   expires: timestamp("expires", { mode: "date" }).notNull(),
