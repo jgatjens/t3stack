@@ -7,6 +7,7 @@ import { api } from "~/trpc/server";
 import { ShowUsers } from "~/components/show-users";
 import { Link } from "~/navigation";
 import { Plus as PlusIcon } from "lucide-react";
+import { UserRole } from "~/constans";
 
 export const metadata = {
   title: "Users",
@@ -17,7 +18,7 @@ export default async function UsersPage() {
   const userSession = await getCurrentUser();
   const users = await api.user.getAll.query();
 
-  if (userSession?.role !== "ADMIN") {
+  if (userSession?.role !== UserRole.Admin) {
     redirect("/settings");
   }
 

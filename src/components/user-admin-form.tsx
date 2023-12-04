@@ -78,23 +78,23 @@ export function UserAdminForm({
 
   const [isSaving, setIsSaving] = React.useState<boolean>(false);
 
-  const updateUser = api.user.update.useMutation({
-    onSuccess: () => {
-      toast({ title: "El usuario a sido creado." });
-      setIsSaving(false);
-      setTimeout(() => {
-        router.push("/settings/users");
-      }, 3000);
-    },
-    onError: (error) => {
-      toast({
-        variant: "destructive",
-        title: "¡Oh, oh! Algo salió mal.",
-        description: error.message,
-      });
-      setIsSaving(false);
-    },
-  });
+  // const updateUser = api.user.update.useMutation({
+  //   onSuccess: () => {
+  //     toast({ title: "El usuario a sido creado." });
+  //     setIsSaving(false);
+  //     setTimeout(() => {
+  //       router.push("/settings/users");
+  //     }, 3000);
+  //   },
+  //   onError: (error) => {
+  //     toast({
+  //       variant: "destructive",
+  //       title: "¡Oh, oh! Algo salió mal.",
+  //       description: error.message,
+  //     });
+  //     setIsSaving(false);
+  //   },
+  // });
 
   const createUser = api.user.create.useMutation({
     onSuccess: () => {
@@ -116,8 +116,6 @@ export function UserAdminForm({
 
   function onSubmit(data: z.infer<typeof userAdminSchema>) {
     setIsSaving(true);
-
-    debugger;
 
     if (user?.id) {
       // updateUser.mutate({

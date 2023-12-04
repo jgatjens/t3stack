@@ -11,7 +11,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { UserAvatar } from "~/components/user-avatar";
-import { UsersType } from "~/server/db/schema";
+import type { UsersType } from "~/server/db/schema";
 
 interface UserAccountNavProps extends React.HTMLAttributes<HTMLDivElement> {
   user: Pick<UsersType, "name" | "image" | "email" | "role">;

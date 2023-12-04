@@ -1,5 +1,5 @@
 import { type Icons } from "~/components/icons";
-import { UserRole } from "~/constans";
+import type { UserRole } from "~/constans";
 
 export type SiteConfig = {
   name: string;
