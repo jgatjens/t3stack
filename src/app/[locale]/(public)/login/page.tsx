@@ -7,6 +7,7 @@ import { getServerAuthSession } from "~/server/auth";
 import { redirect } from "~/navigation";
 import LoginForm from "./login-form";
 import LocaleSwitcher from "~/components/locale-switcher";
+import { ModeToggle } from "~/components/mode-toggle";
 
 export const metadata: Metadata = {
   title: "login - frontapp",
@@ -26,6 +27,10 @@ export default async function LoginPage() {
     <>
       <div className="relative h-screen flex-col items-center justify-center lg:container lg:grid lg:max-w-none lg:grid-cols-2 lg:px-0">
         <LocaleSwitcher />
+
+        <div className="absolute bottom-4 right-4 mb-4 mr-4">
+          <ModeToggle />
+        </div>
 
         <div className="relative flex-col bg-muted p-6 py-10 text-white dark:border-r lg:flex lg:h-full lg:p-10">
           <div className="absolute inset-0 bg-zinc-900" />
