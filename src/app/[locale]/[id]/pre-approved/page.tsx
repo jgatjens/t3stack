@@ -3,11 +3,12 @@ import { redirect } from "next/navigation";
 import { getCurrentUser } from "~/lib/session";
 import { DashboardHeader } from "~/components/header";
 import { DashboardShell } from "~/components/shell";
-import { UserNameForm } from "~/components/user-name-form";
+import { StepByStep } from "~/components/step-step";
 import { api } from "~/trpc/server";
+import { siteConfig } from "~/config/settings";
 
 export const metadata = {
-  title: "Pre Aprovado",
+  title: "Pre Aprovado - Datos Personales",
   description: "Pre Aprovado - Analítica de Datos Financieros",
 };
 
@@ -24,12 +25,12 @@ export default async function SettingsPage() {
 
   return (
     <DashboardShell>
-      <DashboardHeader
-        heading="FRONTAPP"
+      {/* <DashboardHeader
+        heading="Pre Aprovado - Datos Personales"
         text="Analítica de Datos Financieros"
-      />
+      /> */}
       <div className="grid gap-10">
-        {/* <UserNameForm user={{ email: user.email, name: user.name ?? "" }} /> */}
+        {/* <StepByStep items={siteConfig.sidebarPreApproved} /> */}
       </div>
     </DashboardShell>
   );

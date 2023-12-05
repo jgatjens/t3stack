@@ -1,16 +1,28 @@
 import { UserRole } from "~/constans";
-import type { SettingsConfig } from "~/types";
+import type { SiteNavConfig } from "~/types";
 
-export const settingsConfig: SettingsConfig = {
+export const siteConfig: SiteNavConfig = {
   mainNav: [
     {
-      title: "Dashboard",
-      href: "/dashboard",
+      title: "Pre Aprovado",
+      href: "/pre-approved",
+    },
+  ],
+  sidebarPreApproved: [
+    {
+      title: "Datos Personales",
+      href: "/pre-approved",
+      icon: "settings",
     },
     {
-      title: "AI Score",
-      href: "/support",
-      disabled: true,
+      title: "Actividad Económica",
+      href: "/pre-approved/economic-activity",
+      icon: "post",
+    },
+    {
+      title: "Verificación de Normativa",
+      href: "/pre-approved/regulatory-verification",
+      icon: "post",
     },
   ],
   sidebarNav: [

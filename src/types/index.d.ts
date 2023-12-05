@@ -21,9 +21,10 @@ export type NavItem = {
 
 export type MainNavItem = NavItem;
 
-export type SettingsConfig = {
-  mainNav: MainNavItem[];
+export type SiteNavConfig = {
+  mainNav: NavItem[];
   sidebarNav: SidebarNavItem[];
+  sidebarPreApproved: SidebarNavItem[];
 };
 
 export type SidebarNavItem = {
