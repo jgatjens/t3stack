@@ -20,7 +20,7 @@ export function DashboardNav({ items, role }: DashboardNavProps) {
 
   // console.log("path", path);
   return (
-    <nav className="grid items-start gap-2">
+    <nav className="sticky top-0 grid items-start gap-2 ">
       {items.map((item: SidebarNavItem, index) => {
         const Icon = Icons[item.icon ?? "arrowRight"];
 
